@@ -138,12 +138,9 @@ const TYPE_COLORS: Record<RequestType, string> = {
 
 export default function CompanyList() {
   const [isClient, setIsClient] = useState(false);
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [searchName, setSearchName] = useState('');
   const [searchRegion, setSearchRegion] = useState('');
   const [searchType, setSearchType] = useState('');
-  const [selectedRegions, setSelectedRegions] = useState<Region[]>([]);
-  const [selectedTypes, setSelectedTypes] = useState<RequestType[]>([]);
 
   useEffect(() => {
     setIsClient(true);
@@ -164,25 +161,7 @@ export default function CompanyList() {
     window.location.href = `mailto:${company.founder.email}?subject=${subject}&body=${body}`;
   };
 
-  const toggleRegion = (region: Region) => {
-    setSelectedRegions(prev => 
-      prev.includes(region) 
-        ? prev.filter(r => r !== region)
-        : [...prev, region]
-    );
-  };
-
-  const toggleType = (type: RequestType) => {
-    setSelectedTypes(prev => 
-      prev.includes(type) 
-        ? prev.filter(t => t !== type)
-        : [...prev, type]
-    );
-  };
-
   const clearFilters = () => {
-    setSelectedRegions([]);
-    setSelectedTypes([]);
     setSearchName('');
     setSearchRegion('');
     setSearchType('');
